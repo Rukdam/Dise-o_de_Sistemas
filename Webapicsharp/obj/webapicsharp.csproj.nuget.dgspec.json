@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jumig\\OneDrive\\Escritorio\\Proyecto - Aplicaciones\\webapicsharp\\webapicsharp.csproj": {}
+    "C:\\Dev\\Proyecto - Diseño de sistemas\\Dise-o_de_Sistemas\\Webapicsharp\\webapicsharp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jumig\\OneDrive\\Escritorio\\Proyecto - Aplicaciones\\webapicsharp\\webapicsharp.csproj": {
+    "C:\\Dev\\Proyecto - Diseño de sistemas\\Dise-o_de_Sistemas\\Webapicsharp\\webapicsharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jumig\\OneDrive\\Escritorio\\Proyecto - Aplicaciones\\webapicsharp\\webapicsharp.csproj",
+        "projectUniqueName": "C:\\Dev\\Proyecto - Diseño de sistemas\\Dise-o_de_Sistemas\\Webapicsharp\\webapicsharp.csproj",
         "projectName": "webapicsharp",
-        "projectPath": "C:\\Users\\jumig\\OneDrive\\Escritorio\\Proyecto - Aplicaciones\\webapicsharp\\webapicsharp.csproj",
+        "projectPath": "C:\\Dev\\Proyecto - Diseño de sistemas\\Dise-o_de_Sistemas\\Webapicsharp\\webapicsharp.csproj",
         "packagesPath": "C:\\Users\\jumig\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jumig\\OneDrive\\Escritorio\\Proyecto - Aplicaciones\\webapicsharp\\obj\\",
+        "outputPath": "C:\\Dev\\Proyecto - Diseño de sistemas\\Dise-o_de_Sistemas\\Webapicsharp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jumig\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -54,6 +54,20 @@
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[6.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             },
             "MySql.Data": {
               "target": "Package",

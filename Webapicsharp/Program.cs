@@ -11,7 +11,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 // Importa utilidades para detectar el entorno (Desarrollo, Producción, etc.).
 using Microsoft.Extensions.Hosting;
-
+using WebApiCSharp.Infrastructure.Persistence;
+using WebApiCSharp.Domain.Interfaces;
+using WebApiCSharp.Infrastructure.Repositories;
+using WebApiCSharp.Application.Interfaces;
+using WebApiCSharp.Application.Services;
+using Microsoft.EntityFrameworkCore;
 // Crea el "builder": punto de inicio para configurar servicios y la aplicación.
 var builder = WebApplication.CreateBuilder(args);
 
@@ -91,6 +96,19 @@ builder.Services.AddSingleton<webapicsharp.Servicios.Abstracciones.IProveedorCon
 // REGISTRO AUTOMÁTICO DEL REPOSITORIO SEGÚN DatabaseProvider (DIP + OCP)
 // La API genérica lee la configuración y usa el proveedor correcto automáticamente
 var proveedorBD = builder.Configuration.GetValue<string>("DatabaseProvider") ?? "SqlServer";
+
+builder.Services.AddScoped<WebApiCSharp.Domain.Repositories.IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<WebApiCSharp.Domain.Repositories.IProductoRepository, ProductoRepository>();
+builder.Services.AddScoped<WebApiCSharp.Domain.Repositories.IOrdenRepository, OrdenRepository>();
+builder.Services.AddScoped<WebApiCSharp.Domain.Repositories.ITareaRepository, TareaRepository>();
+
+builder.Services.AddScoped<WebApiCSharp.Domain.Repositories.IUnitOfWork, WebApiCSharp.Infrastructure.UnitOfWork.UnitOfWork>();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+builder.Services.AddScoped<IProductoService, ProductoService>();
 
 // -----------------------------------------------------------------------------
 // REGISTRO DE SERVICIO CONSULTAS (DIP)
@@ -177,6 +195,11 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = "swagger";
 });
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await DataSeeder.SeedAsync(db);
+}
 // Redirige HTTP a HTTPS para mejorar la seguridad, si el certificado está configurado.
 app.UseHttpsRedirection();
 
